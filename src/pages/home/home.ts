@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SONIDOSLIST }  from "../../data/data.animales";
 import { timbres }  from "../../interfaces/sonidos.interface";
-import { Refresher } from 'ionic-angular';
+import { Refresher, reorderArray } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -13,6 +13,7 @@ export class HomePage {
   sonidos:timbres[] = [];
   audio = new Audio();
   audioTiempo:any;
+  ordenando:boolean = false;
 
   constructor() {
     this.sonidos = SONIDOSLIST.slice(0);
@@ -59,6 +60,11 @@ export class HomePage {
       refresher.complete();
     }, 2000)
 
+  }
+
+  reordenar_sonidos( indices:any ){
+     console.log(indices)
+     this.sonidos = reorderArray( this.sonidos, indices );
   }
 
 }
