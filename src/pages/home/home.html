@@ -1,14 +1,37 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
+  <ion-navbar color='primary'>
+    <ion-title aling='center'>
+      Funny Tones
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="actualizando_sonidos($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let sonido of sonidos; let i = index ">
+
+     <ion-item (click)='reproducir( sonido )'>
+       <ion-avatar item-left>
+         <img [src]="sonido.imagen">
+       </ion-avatar>
+       <h2> {{ sonido.nombre }}</h2>
+       <ion-icon *ngIf="!sonido.reproduciendo" name="play" item-right></ion-icon>
+       <ion-icon *ngIf="sonido.reproduciendo" name="pause" item-right></ion-icon>
+     </ion-item>
+
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)='borrar_animal(i)'>
+        <ion-icon name="trash"></ion-icon>
+        Borrar
+      </button>
+    </ion-item-options>
+
+   </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
